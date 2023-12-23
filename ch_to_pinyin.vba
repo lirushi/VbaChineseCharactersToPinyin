@@ -415,7 +415,15 @@ End Select
 End Function
 
 Function GetPY(str)
-For i = 1 To Len(str)
-GetPY = GetPY & pinyin(Mid(str, i, 1))
-Next i
+    For i = 1 To Len(str)
+        Dim currentChar As String
+        currentChar = Mid(str, i, 1)
+        
+        ' 调用 pinyin 函数获取小写字符串
+        Dim pinyinResult As String
+        pinyinResult = pinyin(currentChar)
+        
+        ' 将小写字符串的首字母大写，并拼接到结果字符串中
+        GetPY = GetPY & UCase$(Left(pinyinResult, 1)) & Mid(pinyinResult, 2)
+    Next i
 End Function
